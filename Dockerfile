@@ -49,13 +49,8 @@ RUN mkdir -pv /app \
 
 WORKDIR /app
 COPY . /app
-RUN cp .env.example .env \
- && chown www-data:www-data -R bootstrap \
- && chown www-data:www-data -R storage \
- && composer install --no-dev \
- && php artisan optimize:clear \
- && php artisan lang:js \
- && php artisan key:generate --force
+RUN chown www-data:www-data . -R \
+ && composer install --no-dev
 
 EXPOSE 80
 EXPOSE 443
